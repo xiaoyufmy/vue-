@@ -1,5 +1,9 @@
 <template lang="html">
-    <div id="tmpl">
+    <div id="temp">
+        <div class="top">
+            <a href="javascript:history.go(-1);" class="back">‹</a>
+            <mt-header fixed title="Vue新闻详情"></mt-header>
+        </div>
         <div class="title">
             <h4 v-text="info.title"></h4>
             <p>{{info.add_time | datefmt('YYYY/MM/DD')}} {{info.click}}次浏览</p>
@@ -12,6 +16,8 @@
 
 <script type="text/ecmascript-6">
     import {Toast} from 'mint-ui';
+    import common from '../../kits/common.js';
+
     export default {
         data: function () {
             return {
@@ -25,7 +31,7 @@
         },
         methods:{
             getinfo:function(){
-                var url = 'http://182.254.146.100:8899/api/getnew/' + this.id;
+                var url = common.apidomain + '/api/getnew/' + this.id;
                 this.$http.get(url).then(function(response){
                     var data = response.body;
                     if (data.status != 0) {
@@ -40,7 +46,22 @@
 </script>
 
 <style lang="css" scoped>
+    .top a{
+        float: left;
+    }
+    .top a.back {
+        color: #fff;
+        top: 7px;
+        left: 5px;
+        position: absolute;
+        z-index: 999;
+        font-size: 50px;
+    }
+    #temp{
+        padding: 0 5px;
+    }
     .title h4{
+        font-size: 17px;
         color: #0094ff;
     }
     .title p{

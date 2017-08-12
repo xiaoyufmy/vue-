@@ -1,5 +1,10 @@
 <template lang="html">
-    <div id="tmpl">
+    <div id="temp">
+        <div class="top">
+            <a href="javascript:history.go(-1);" class="back">‹</a>
+            <mt-header fixed title="Vue新闻资讯"></mt-header>
+        </div>
+
         <ul class="mui-table-view">
             <li v-for="item in list" class="mui-table-view-cell mui-media">
                 <router-link v-bind="{to:'newsinfo/' + item.id}">
@@ -7,7 +12,7 @@
                     <div class="mui-media-body">
                         {{item.title}}
                         <p class='mui-ellipsis' v-text='item.zhaiyao'></p>
-                        <div class="ft">
+                        <div class="footer">
                             <span>发表时间:{{item.add_time | datefmt('YYYY-MM-DD HH:mm:ss')}}</span>
                             <span class="click">点击数:{{item.click}}</span>
                         </div>
@@ -20,6 +25,7 @@
 
 <script type="text/ecmascript-6">
     import {Toast} from 'mint-ui';
+    import common from '../../kits/common.js';
 
     export default {
         data: function () {
@@ -34,7 +40,7 @@
         },
         methods: {
             getnewslist:function(){
-                var url = 'http://182.254.146.100:8899/api/getnewslist';
+                var url = common.apidomain + '/api/getnewslist';
                 this.$http.get(url).then(function(response){
                     var data = response.body;
                     if (data.status != 0) {
@@ -49,6 +55,18 @@
 </script>
 
 <style lang="css" scoped>
+    .top a{
+        float: left;
+    }
+    .top a.back {
+        color: #fff;
+        top: 7px;
+        left: 5px;
+        position: absolute;
+        z-index: 999;
+        font-size: 50px;
+    }
+
     .mui-table-view{
         font-size: 16px;
     }
@@ -63,9 +81,14 @@
     .footer{
         margin-top: 1.5em;
         font-size: 12px;
-        color: #8e96ff;
+        color: #b4b4b4;
     }
     .footer .click{
         margin-left: 20px;
+    }
+    .mui-ellipsis{
+        line-height: 26px;
+        color: #6978ff;
+        font-size: 14px;
     }
 </style>

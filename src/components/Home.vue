@@ -54,6 +54,8 @@
 <script type="text/ecmascript-6">
     import {Toast} from 'mint-ui';
 
+    import common from '../kits/common.js'
+
     export default {
         data: function () {
             return{
@@ -78,7 +80,7 @@
         },
         methods:{
             getImgs:function(){
-                var url = 'http://182.254.146.100:8899/api/getlunbo';
+                var url = common.apidomain + '/api/getlunbo';
                 this.$http.get(url).then(function(res){
                     var data = res.body;
                     if (data.status != 0) {
