@@ -39,16 +39,18 @@ import shopcar from './components/shopcar/car.vue';
 import newslist from './components/news/newslist.vue';
 import newsinfo from './components/news/newsinfo.vue';
 import photolist from './components/photo/photolist.vue';
+import photoinfo from './components/photo/photoinfo.vue';
 
 var router1 = new vueRouter({
     linkActiveClass : 'mui-active',
     routes : [
-        {path:"/",redirect:"/home"},
-        {path:'/home', component: home},
+        {path: "/",redirect:"/home"},
+        {path: '/home', component: home},
         {path: '/shopcar', component: shopcar},
         {path: '/news/newslist', component: newslist},
         {path: '/news/newsinfo/:id', component: newsinfo},
         {path: '/photo/photolist', component: photolist},
+        {path: '/photo/photoinfo/:id', component: photoinfo}
     ]
 });
 
