@@ -47,7 +47,7 @@
             }
 		},
 		created:function(){
-//			Toast('welcome to my page.');
+			Toast('welcome to my page.');
 		}
 	}
 </script>

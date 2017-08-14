@@ -97,9 +97,11 @@
 <style lang="css" scoped>
     .mint-swipe{
         height: 160px;
+        /*height: 300px;*/
     }
 
     .mint-swipe-item img{
+        display: block;
         width: 100%;
     }
     .mint-swipe-item{

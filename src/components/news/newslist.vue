@@ -62,7 +62,7 @@
         color: #fff;
         top: 7px;
         left: 5px;
-        position: absolute;
+        position: fixed;
         z-index: 999;
         font-size: 50px;
     }

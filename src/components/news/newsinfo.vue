@@ -8,17 +8,20 @@
             <h4 v-text="info.title"></h4>
             <p>{{info.add_time | datefmt('YYYY/MM/DD')}} {{info.click}}次浏览</p>
         </div>
-        <div class="content" v-html="info.content">
-
-        </div>
+        <div class="content" v-html="info.content"></div>
+        <comment :id="id"></comment>
     </div>
 </template>
 
 <script type="text/ecmascript-6">
     import {Toast} from 'mint-ui';
     import common from '../../kits/common.js';
+    import comment from '../subcom/comment.vue';
 
     export default {
+        components:{
+            comment
+        },
         data: function () {
             return {
                 id : 0,
@@ -53,7 +56,7 @@
         color: #fff;
         top: 7px;
         left: 5px;
-        position: absolute;
+        position: fixed;
         z-index: 999;
         font-size: 50px;
     }
