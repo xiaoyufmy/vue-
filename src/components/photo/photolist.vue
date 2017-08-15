@@ -4,6 +4,7 @@
             <a href="javascript:history.go(-1);" class="back">‹</a>
             <mt-header fixed title="Vue图片分享"></mt-header>
         </div>
+        <!-- 图片分类 -->
         <div id="cate">
             <ul v-bind="{style:'width:'+ulWidth+'px'}">
                 <li @click="getimages(0)">全部</li>
@@ -11,6 +12,7 @@
             </ul>
         </div>
 
+        <!-- 图片列表 -->
         <div id="imglist">
             <ul>
                 <li v-for="item in list">
@@ -34,59 +36,51 @@
     export default {
         data: function () {
             return{
-                cates:[],
+                cates:[],//用来存储图片分类数据的数组
                 ulWidth:320,
-                list:[]
+                list:[]//存储图片数据的数据
             }
         },
         methods: {
             getcates: function () {
                 var url = common.apidomain + '/api/getimgcategory';
-                this.$http.get(url).then(function(response){
+                this.$http.get(url).then(function(response){//调用$http的get方法获取数据
                     var data = response.body;
                     if (data.status != 0) {
                         Toast(data.message);
                         return ;
                     }
-                    this.cates = data.message;
+                    this.cates = data.message;//实现数据的赋值操作
 
-                    var width = 62;
-                    var counts = data.message.length + 1;
+                    //实现当前分类数据所在的ul的总宽度 = 分类个数 * 每个分类数据的宽度
+                    var width = 62;// 每个li的宽度
+                    var counts = data.message.length + 1;// 动态获取数据的长度 + 【全部】 = 总个数
                     this.ulWidth = width * counts;
                 })
             },
+            //加载图片数据
             getimages: function (cateid) {
+                //如果方法的cateid参数没有传递，则默认是0,代表获取所有图片数据
                 cateid = cateid || 0;
-                var url = common.apidomain + '/api/getimages/' + cateid;
-                this.$http.get(url).then(function(response){
+                var url = common.apidomain + '/api/getimages/' + cateid;//确定url
+                this.$http.get(url).then(function(response){//ajax请求数据
                     var data = response.body;
                     if (data.status != 0) {
                         Toast(data.message);
                         return ;
                     }
-                    this.list = data.message;
+                    this.list = data.message;//将数据复制给this.list
                 })
             }
         },
         created: function () {
-            this.getcates();
-            this.getimages(0);//0表示获取全部图片
+            this.getcates();//获取图片分类数据
+            this.getimages(0);//加载图片数据  0表示获取全部数据
         }
     }
 </script>
 
 <style lang="css" scoped>
-    .top a{
-        float: left;
-    }
-    .top a.back {
-        color: #fff;
-        top: 7px;
-        left: 5px;
-        position: fixed;
-        z-index: 999;
-        font-size: 50px;
-    }
 
     #cate{
         width: 320px;
@@ -105,7 +99,6 @@
         font-size: 14px;
         padding-left: 6px;
     }
-
     #imglist ul {
         padding-left: 0px;
         margin: 0;
@@ -124,6 +117,7 @@
         position: absolute;
         bottom: 2px;
         left: 0px;
+        padding: 0 5px;
     }
     #desc h5{
         color: #ffffff;

@@ -98,6 +98,6 @@
         padding: 5px;
         color: #6d6d72;
         font-size: 15px;
-        background-color: rgba(0,0,0,0.1);
+        background-color: rgba(0,0,0,0.05);
     }
 </style>

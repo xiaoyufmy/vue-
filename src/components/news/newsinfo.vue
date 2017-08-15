@@ -49,17 +49,7 @@
 </script>
 
 <style lang="css" scoped>
-    .top a{
-        float: left;
-    }
-    .top a.back {
-        color: #fff;
-        top: 7px;
-        left: 5px;
-        position: fixed;
-        z-index: 999;
-        font-size: 50px;
-    }
+
     #temp{
         padding: 0 5px;
     }

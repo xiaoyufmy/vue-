@@ -1,12 +1,14 @@
 <template lang="html">
     <div class="temp">
         <!-- 轮播图组件 -->
-        <mt-swipe :auto="2000">
+        <!--<mt-swipe :auto="2000">
             <mt-swipe-item v-for="item in list" :key="item.id">
                 <img v-bind:src="item.img">
             </mt-swipe-item>
-        </mt-swipe>
-
+        </mt-swipe>-->
+        <div class="silder">
+            <silder :imgs="list"></silder>
+        </div>
         <!-- 九宫格 -->
         <div class="mui-content">
             <ul class="mui-table-view mui-grid-view mui-grid-9">
@@ -55,8 +57,12 @@
     import {Toast} from 'mint-ui';
 
     import common from '../kits/common.js'
+    import silder from './subcom/silder.vue'
 
     export default {
+        components: {
+            silder//注册组件
+        },
         data: function () {
             return{
                 list:[
@@ -95,20 +101,8 @@
 </script>
 
 <style lang="css" scoped>
-    .mint-swipe{
-        height: 160px;
-        /*height: 300px;*/
-    }
 
-    .mint-swipe-item img{
-        display: block;
-        width: 100%;
-    }
-    .mint-swipe-item{
-        background-color: #6b4cff;
-        width: 100%;
-        height: 300px;
-    }
+
     .mui-content,.mui-content ul{
         background-color: #fff;
     }

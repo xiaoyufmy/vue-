@@ -20,7 +20,7 @@ module.exports={
                 loader:'style-loader!css-loader!less-loader'
             },
             {
-                test: /\.(png|jpg|gif|ttf)$/,
+                test: /\.(png|jpg|gif|ttf|svg)$/,
                 loader:'url-loader?limit=20000'
             },
             //{
@@ -31,7 +31,11 @@ module.exports={
             {
                 test: /.vue$/,
                 loader:'vue-loader'
-            }
+            },
+            //{
+            //    test:/vue-preview.src.*?js$/,
+            //    loader:'babel'
+            //}
         ]
     },
     //babel:{
@@ -40,7 +44,7 @@ module.exports={
     //},
     plugins:[
         new htmlwp({
-            title: 'Ê×Ò³',
+            title: 'é¦–é¡µ',
             filename: 'index.html',
             template: 'index1.html'
         })

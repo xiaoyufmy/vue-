@@ -1,29 +1,6 @@
 /**
  * Created by xiaoyu on 2017/8/9.
  */
-/*
-var v1 = document.querySelector('#v1');
-var v2 = document.querySelector('#v2');
-var bt = document.querySelector('#bt');
-var res = document.querySelector('#res');
-
-require('../statics/css/site.css');
-require('../statics/mui/css/icons-extra.css');
-require('../statics/css/site1.scss');
-require('../statics/css/site2.less');
-
-import '../statics/css/site.css';
-
-import addObj from './calc.js';
-
-bt.onclick=function(){
-    var v1value = parseFloat(v1.value);
-    var v2value = parseFloat(v2.value);
-    var add = require('./calc.js');
-
-    res.value = add(v1value,v2value);
-}*/
-
 
 import Vue from 'vue';
 
@@ -33,13 +10,16 @@ import vueRouter from 'vue-router';
 
 Vue.use(vueRouter);
 
-
 import home from './components/Home.vue';
 import shopcar from './components/shopcar/car.vue';
 import newslist from './components/news/newslist.vue';
 import newsinfo from './components/news/newsinfo.vue';
 import photolist from './components/photo/photolist.vue';
 import photoinfo from './components/photo/photoinfo.vue';
+import goodslist from './components/goods/goodslist.vue';
+import goodsinfo from './components/goods/goodsinfo.vue';
+import goodsdesc from './components/goods/goodsdesc.vue';
+import goodscomment from './components/goods/goodscomment.vue';
 
 var router1 = new vueRouter({
     linkActiveClass : 'mui-active',
@@ -50,10 +30,13 @@ var router1 = new vueRouter({
         {path: '/news/newslist', component: newslist},
         {path: '/news/newsinfo/:id', component: newsinfo},
         {path: '/photo/photolist', component: photolist},
-        {path: '/photo/photoinfo/:id', component: photoinfo}
+        {path: '/photo/photoinfo/:id', component: photoinfo},
+        {path: '/goods/goodslist', component: goodslist},
+        {path: '/goods/goodsinfo/:id', component: goodsinfo},
+        {path: '/goods/goodsdesc/:id',component: goodsdesc},
+        {path: '/goods/goodscomment/:id',component: goodscomment},
     ]
 });
-
 
 import 'mint-ui/lib/style.min.css'
 
@@ -73,10 +56,11 @@ Vue.filter('datefmt', function(input, fmtstring){
     return moment(input).format(fmtstring)
 })
 
+import VuePreview from 'vue-preview';
+Vue.use(VuePreview);
+
 new Vue({
-        el:'#app',
-
-        router:router1,
-
-        render:c=>c(App)
+    el:'#app',
+    router:router1,
+    render:c=>c(App)
 });
