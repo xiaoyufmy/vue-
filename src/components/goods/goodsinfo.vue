@@ -20,10 +20,15 @@
                 </li>
                 <li class="inputli">
                     购买数量： <inputnumber v-on:dataobj="getcount" class="inputnumber"></inputnumber>
+                    <transition name="show"
+                                @before-enter="beforeEnter" @enter="enter" @after-enter="afterEnter"
+                            >
+                        <div v-if="isshow" class="ball"></div>
+                    </transition>
                 </li>
                 <li>
                     <mt-button type="primary" size="small">立即购买</mt-button>
-                    <mt-button type="danger" size="small">加入购物车</mt-button>
+                    <mt-button @click="toshopcar" type="danger" size="small">加入购物车</mt-button>
                 </li>
             </ul>
         </div>
@@ -56,6 +61,8 @@
     import silder from '../subcom/silder.vue';
     import common from '../../kits/common.js';
     import inputnumber from '../subcom/inputNumber.vue';
+    import {vm,COUNTSTR} from '../../kits/vm.js';
+    import {setItem,valueObj} from '../../kits/localStorage.js';
 
     export default {
         components:{silder,inputnumber},
@@ -63,10 +70,23 @@
             return{
                 id:0,//商品id
                 imgs:[],
-                info:{}
+                info:{},
+                inputNumberCount:1,
+                isshow:false
             }
         },
         methods:{
+            beforeEnter: function (el) {
+                el.style.transform = "translate(0px,0px)";
+            },
+            enter: function (el,done) {
+                el.offsetWidth;
+                el.style.transform = "translate(50px,300px)";
+                done();
+            },
+            afterEnter: function (el) {
+                this.isshow = !this.isshow;
+            },
             getimgs:function(){
                 var url  = common.apidomain + '/api/getthumimages/'+this.id;
                 this.$http.get(url).then(function(response){
@@ -92,6 +112,13 @@
             getcount:function(count){
                 this.inputNumberCount = count;
             },
+            toshopcar: function () {
+                vm.$emit(COUNTSTR,this.inputNumberCount);
+                valueObj.goodsid = this.id;
+                valueObj.count = this.inputNumberCount;
+                setItem(valueObj);
+                this.isshow = !this.isshow;
+            }
         },
         created: function () {
             this.id = this.$route.params.id;
@@ -145,5 +172,19 @@
         position: absolute;
         left:100px;
         top:5px;
+    }
+    .price s{
+        font-size: 12px;
+    }
+    .ball{
+        background-color: red;
+        height: 20px;
+        width: 20px;
+        border-radius: 50%;
+        position: absolute;
+        left:150px;
+        top:10px;
+        transition: all 0.4s ease;
+        z-index: 100;
     }
 </style>
